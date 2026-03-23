@@ -5,15 +5,11 @@ export default defineConfig({
   routes: [
     {
       path: "/",
-      component: "@/layouts/client/index.tsx",
-      routes: [{ path: "", component: "index.tsx" }],
-    },
-    {
-      path: "/auth",
-      component: "@/layouts/client/auth.tsx",
+      component: "@/layouts/index.tsx",
       routes: [
-        { path: "login", component: "auth/login.tsx" },
-        { path: "register", component: "auth/register.tsx" },
+        { path: "", component: "index.tsx" },
+        { path: "auth/login", component: "auth/login.tsx" },
+        { path: "auth/register", component: "auth/register.tsx" },
       ],
     },
     { path: "*", component: "@/pages/404.tsx" },

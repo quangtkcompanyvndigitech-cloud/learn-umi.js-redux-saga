@@ -1,0 +1,29 @@
+.auth-page .auth-page-heading {
+  font-size: 26px;
+  line-height: 1.3;
+}
+
+.auth-page .auth-section-title {
+  font-size: 22px;
+  line-height: 1.35;
+}
+
+.auth-page .auth-body-text {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.auth-page .label-title.auth-label {
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.auth-page .form-control.auth-input {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.auth-page .login-area .btn {
+  font-size: 16px;
+  line-height: 1.4;
+}
