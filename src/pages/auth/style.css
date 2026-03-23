@@ -27,3 +27,57 @@
   font-size: 16px;
   line-height: 1.4;
 }
+
+.auth-page .form-row {
+  font-size: 14px;
+}
+
+.auth-page input::placeholder {
+  font-size: 14px;
+}
+
+@media (max-width: 992px) {
+  .registration-media {
+    display: none;
+  }
+
+  .start-side-content {
+    height: auto !important;
+    padding: 70px 15px 0px 15px !important;
+  }
+}
+
+
+@media only screen and (max-width: 767px) {
+  .start-side-content {
+    height: auto !important;
+  }
+}
+
+@media only screen and (min-width: 300px) and (max-width: 991px) {
+  .start-side-content {
+    height: auto !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .start-side-content::after {
+    display: none !important;
+  }
+}
+
+.auth-field-error {
+  color: #dc3545;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.auth-form-message {
+  font-size: 14px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.auth-form-message--ok {
+  color: #198754;
+}

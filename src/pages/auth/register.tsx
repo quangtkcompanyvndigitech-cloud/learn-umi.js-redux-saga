@@ -1,101 +1,239 @@
 import { useState } from "react";
-import { Link } from "umi";
-import { useDispatch, useSelector } from "react-redux";
-import { registerRequest } from "@/store/slices/authSlice";
+import { Link, history } from "umi";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { registerSchema } from "./schemas";
+import "./style.css";
 
 export default function RegisterPage() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const dispatch = useDispatch(); // dùng để dispatch action, tức là gửi action đến reducer
-  const { loading, error, registerOk } = useSelector((s: any) => s.auth); // useSelector để lấy state từ reducer
-  const headingStyle = { fontSize: 26, lineHeight: 1.3 };
-  const sectionTitleStyle = { fontSize: 22, lineHeight: 1.35 };
-  const bodyTextStyle = { fontSize: 16, lineHeight: 1.5 };
-  const labelStyle = { fontSize: 16, lineHeight: 1.4 };
-  const inputStyle = { fontSize: 16, lineHeight: 1.5 };
-  const buttonTextStyle = { fontSize: 16, lineHeight: 1.4 };
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [submitError, setSubmitError] = useState<any>(null);
+  const [registerOk, setRegisterOk] = useState<any>(null);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(registerSchema),
+    defaultValues: {
+      fullName: "",
+      phone: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+  });
+
+  const onSubmit = async (data: any) => {
+    setLoading(true);
+    setSubmitError(null);
+    setRegisterOk(null);
+    try {
+      const user = {
+        fullName: data.fullName,
+        phone: data.phone,
+        email: data.email,
+      };
+      const userValue = encodeURIComponent(JSON.stringify(user));
+
+      document.cookie = `auth_user=${userValue}; path=/; max-age=604800; samesite=lax`;
+
+      setRegisterOk("Đăng ký thành công");
+      history.push("/admin/dashboard");
+    } catch (err: any) {
+      setSubmitError(err?.message || "Đăng ký thất bại");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    // <div>
-    //   <h2>Đăng ký</h2>
-    //   <form
-    //     onSubmit={(e) => {
-    //       e.preventDefault();
-    //       dispatch(registerRequest({ email, password, name })); // tức là gửi action đến reducer, cụ thể là dispatch(registerRequest({ email, password, name })) sẽ gửi action đến reducer, và reducer sẽ xử lý action đó
-    //     }}
-    //     style={{ display: "grid", gap: 8, maxWidth: 320 }}
-    //   >
-    //     <input value={name} onChange={(e) => setName(e.target.value)} required placeholder="Tên" />
-    //     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required placeholder="Email" />
-    //     <input
-    //       type="password"
-    //       value={password}
-    //       onChange={(e) => setPassword(e.target.value)}
-    //       minLength={3}
-    //       required
-    //       placeholder="Mật khẩu"
-    //     />
-    //     <button type="submit" disabled={loading}>
-    //       {loading ? "…" : "Đăng ký"}
-    //     </button>
-    //   </form>
-    //   {error && <p style={{ color: "crimson" }}>{error}</p>}
-    //   {registerOk && <p style={{ color: "green" }}>{registerOk}</p>}
-    //   <p>
-    //     <Link to="/auth/login">Đăng nhập</Link>
-    //   </p>
-    // </div>
-    <>
-      <div className="page-content bg-light">
-        <section className="px-3">
-          <div className="row align-center-center">
-            <div className="col-xxl-6 col-xl-6 col-lg-6 start-side-content">
-              <div className="dz-bnr-inr-entry">
-                <h1 style={headingStyle}>Registration</h1>
-                <nav aria-label="breadcrumb text-align-start" className="breadcrumb-row">
-                  <ul className="breadcrumb">
-                    <li className="breadcrumb-item"><a href="/"> Home</a></li>
-                    <li className="breadcrumb-item">Shop Registration</li>
-                  </ul>
-                </nav>
-              </div>
-              <div className="registration-media">
-                <img src="/client/images/registration/pic3.png" alt="/" />
-              </div>
+    <div className="auth-page page-content bg-light">
+      <section className="px-3">
+        <div className="row align-center-center">
+          <div className="col-xxl-6 col-xl-6 col-lg-6 start-side-content">
+            <div className="dz-bnr-inr-entry">
+              <h1 className="auth-page-heading">Registration</h1>
+              <nav
+                aria-label="breadcrumb text-align-start"
+                className="breadcrumb-row"
+              >
+                <ul className="breadcrumb">
+                  <li className="breadcrumb-item">
+                    <a href="/"> Home</a>
+                  </li>
+                  <li className="breadcrumb-item">Shop Registration</li>
+                </ul>
+              </nav>
             </div>
-            <div className="col-xxl-6 col-xl-6 col-lg-6 end-side-content">
-              <div className="login-area">
-                <h2 className="text-secondary text-center" style={sectionTitleStyle}>Registration Now</h2>
-                <p className="text-center m-b30" style={bodyTextStyle}>Welcome please registration to your account</p>
-                <form>
-                  <div className="m-b25">
-                    <label className="label-title" style={labelStyle}>Username</label>
-                    <input name="dzName" required className="form-control" placeholder="Username" type="text" style={inputStyle} />
-                  </div>
-                  <div className="m-b25">
-                    <label className="label-title" style={labelStyle}>Email Address</label>
-                    <input name="dzName" required className="form-control" placeholder="Email Address" type="email" style={inputStyle} />
-                  </div>
-                  <div className="m-b40">
-                    <label className="label-title" style={labelStyle}>Password</label>
-                    <div className="secure-input ">
-                      <input type="password" name="password" className="form-control dz-password" placeholder="Password" style={inputStyle} />
-                      <div className="show-pass">
-                        <i className="eye-open fa-regular fa-eye" />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="text-center">
-                    <a href="registration.html" className="btn btn-secondary btnhover text-uppercase me-2" style={buttonTextStyle}>Register</a>
-                    <a href="login.html" className="btn btn-outline-secondary btnhover text-uppercase" style={buttonTextStyle}>Sign In</a>
-                  </div>
-                </form>
-              </div>
+            <div className="registration-media">
+              <img src="/client/images/registration/pic3.png" alt="/" />
             </div>
           </div>
-        </section>
-      </div>
-    </>
+          <div className="col-xxl-6 col-xl-6 col-lg-6 end-side-content">
+            <div className="login-area">
+              <h2 className="auth-section-title text-secondary text-center">
+                Registration Now
+              </h2>
+              <p className="auth-body-text text-center m-b30">
+                Welcome please registration to your account
+              </p>
+              <form onSubmit={handleSubmit(onSubmit)} noValidate>
+                {submitError && (
+                  <p className="auth-form-message text-danger" role="alert">
+                    {submitError}
+                  </p>
+                )}
+                {registerOk && (
+                  <p
+                    className="auth-form-message auth-form-message--ok"
+                    role="status"
+                  >
+                    {registerOk}
+                  </p>
+                )}
+                <div className="m-b25">
+                  <label className="label-title auth-label" htmlFor="reg-fullName">
+                    Full Name
+                  </label>
+                  <input
+                    id="reg-fullName"
+                    autoComplete="name"
+                    className={`form-control auth-input ${errors.fullName ? "is-invalid" : ""}`}
+                    placeholder="Full name"
+                    type="text"
+                    {...register("fullName")}
+                  />
+                  {errors.fullName && (
+                    <p className="auth-field-error">{errors.fullName.message as any}</p>
+                  )}
+                </div>
+                <div className="m-b25">
+                  <label className="label-title auth-label" htmlFor="reg-phone">
+                    Phone Number
+                  </label>
+                  <input
+                    id="reg-phone"
+                    autoComplete="tel"
+                    className={`form-control auth-input ${errors.phone ? "is-invalid" : ""}`}
+                    placeholder="E.g. 0912345678"
+                    type="tel"
+                    inputMode="numeric"
+                    {...register("phone")}
+                  />
+                  {errors.phone && (
+                    <p className="auth-field-error">{errors.phone.message as any}</p>
+                  )}
+                </div>
+                <div className="m-b25">
+                  <label className="label-title auth-label" htmlFor="reg-email">
+                    Email
+                  </label>
+                  <input
+                    id="reg-email"
+                    autoComplete="email"
+                    className={`form-control auth-input ${errors.email ? "is-invalid" : ""}`}
+                    placeholder="Email"
+                    type="email"
+                    {...register("email")}
+                  />
+                  {errors.email && (
+                    <p className="auth-field-error">{errors.email.message as any}</p>
+                  )}
+                </div>
+                <div className="m-b25">
+                  <label
+                    className="label-title auth-label"
+                    htmlFor="reg-password"
+                  >
+                    Password
+                  </label>
+                  <div className="secure-input ">
+                    <input
+                      id="reg-password"
+                      autoComplete="new-password"
+                      type={showPassword ? "text" : "password"}
+                      className={`form-control dz-password auth-input ${errors.password ? "is-invalid" : ""}`}
+                      placeholder="Password"
+                      {...register("password")}
+                    />
+                    <button
+                      type="button"
+                      className="show-pass border-0 bg-transparent"
+                      onClick={() => setShowPassword((p) => !p)}
+                      aria-label={
+                        showPassword ? "Hide password" : "Show password"
+                      }
+                    >
+                      <i
+                        className={`fa-regular ${showPassword ? "fa-eye-slash" : "fa-eye"}`}
+                      />
+                    </button>
+                  </div>
+                  {errors.password && (
+                    <p className="auth-field-error">
+                      {errors.password.message as any}
+                    </p>
+                  )}
+                </div>
+                <div className="m-b40">
+                  <label
+                    className="label-title auth-label"
+                    htmlFor="reg-confirm"
+                  >
+                    Confirm Password
+                  </label>
+                  <div className="secure-input ">
+                    <input
+                      id="reg-confirm"
+                      autoComplete="new-password"
+                      type={showConfirm ? "text" : "password"}
+                      className={`form-control dz-password auth-input ${errors.confirmPassword ? "is-invalid" : ""}`}
+                      placeholder="Re-enter password"
+                      {...register("confirmPassword")}
+                    />
+                    <button
+                      type="button"
+                      className="show-pass border-0 bg-transparent"
+                      onClick={() => setShowConfirm((p) => !p)}
+                      aria-label={
+                        showConfirm ? "Hide password" : "Show password"
+                      }
+                    >
+                      <i
+                        className={`fa-regular ${showConfirm ? "fa-eye-slash" : "fa-eye"}`}
+                      />
+                    </button>
+                  </div>
+                  {errors.confirmPassword && (
+                    <p className="auth-field-error">
+                      {errors.confirmPassword.message as any}
+                    </p>
+                  )}
+                </div>
+                <div className="text-center">
+                  <button
+                    type="submit"
+                    className="btn btn-secondary btnhover text-uppercase me-2"
+                    disabled={loading}
+                  >
+                    {loading ? "…" : "Register"}
+                  </button>
+                  <Link
+                    to="/auth/login"
+                    className="btn btn-outline-secondary btnhover text-uppercase"
+                  >
+                    Sign In
+                  </Link>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }

@@ -1,19 +1,33 @@
 import { useEffect, useState } from "react";
 import { Link, history } from "umi";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useDispatch, useSelector } from "react-redux";
 import { loginRequest } from "@/store/slices/authSlice";
+import { loginSchema, type LoginValues } from "./schemas";
 import "./style.css";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch<any>();
   const { loading, error, user } = useSelector((s: any) => s.auth);
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginValues>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: { email: "", password: "" },
+  });
+
   useEffect(() => {
     if (user) history.push("/");
   }, [user]);
+
+  const onSubmit = (data: LoginValues) => {
+    dispatch(loginRequest({ email: data.email, password: data.password }));
+  };
 
   return (
     <div className="auth-page page-content bg-light">
@@ -46,25 +60,40 @@ export default function LoginPage() {
               <p className="auth-body-text text-center m-b30">
                 welcome please login to your account
               </p>
-              <form>
+              <form onSubmit={handleSubmit(onSubmit)} noValidate>
+                {error && (
+                  <p className="auth-form-message text-danger" role="alert">
+                    {error}
+                  </p>
+                )}
                 <div className="m-b30">
-                  <label className="label-title auth-label">Email Address</label>
+                  <label className="label-title auth-label" htmlFor="login-email">
+                    Email Address
+                  </label>
                   <input
-                    name="dzName"
-                    required
-                    className="form-control auth-input"
+                    id="login-email"
+                    autoComplete="email"
+                    className={`form-control auth-input fs-14 ${errors.email ? "is-invalid" : ""}`}
                     placeholder="Email Address"
                     type="email"
+                    {...register("email")}
                   />
+                  {errors.email && (
+                    <p className="auth-field-error">{errors.email.message}</p>
+                  )}
                 </div>
                 <div className="m-b15">
-                  <label className="label-title auth-label">Password</label>
+                  <label className="label-title auth-label" htmlFor="login-password">
+                    Password
+                  </label>
                   <div className="secure-input ">
                     <input
+                      id="login-password"
+                      autoComplete="current-password"
                       type={showPassword ? "text" : "password"}
-                      name="password"
-                      className="form-control dz-password auth-input"
+                      className={`form-control dz-password auth-input ${errors.password ? "is-invalid" : ""}`}
                       placeholder="Password"
+                      {...register("password")}
                     />
                     <button
                       type="button"
@@ -79,6 +108,9 @@ export default function LoginPage() {
                       />
                     </button>
                   </div>
+                  {errors.password && (
+                    <p className="auth-field-error">{errors.password.message}</p>
+                  )}
                 </div>
                 <div className="form-row d-flex justify-content-between m-b30">
                   <div className="form-group">
@@ -89,7 +121,7 @@ export default function LoginPage() {
                         id="basic_checkbox_1"
                       />
                       <label
-                        className="form-check-label"
+                        className="form-check-label fs-14"
                         htmlFor="basic_checkbox_1"
                       >
                         Remember Me
@@ -97,24 +129,25 @@ export default function LoginPage() {
                     </div>
                   </div>
                   <div className="form-group">
-                    <a className="text-primary" href="forget-password.html">
+                    <a className="text-primary fs-14" href="forget-password.html">
                       Forgot Password
                     </a>
                   </div>
                 </div>
                 <div className="text-center">
-                  <a
-                    href="account-dashboard.html"
+                  <button
+                    type="submit"
                     className="btn btn-secondary btnhover text-uppercase me-2 sign-btn"
+                    disabled={loading}
                   >
-                    Sign In
-                  </a>
-                  <a
-                    href="registration.html"
+                    {loading ? "…" : "Sign In"}
+                  </button>
+                  <Link
+                    to="/auth/register"
                     className="btn btn-outline-secondary btnhover text-uppercase"
                   >
                     Register
-                  </a>
+                  </Link>
                 </div>
               </form>
             </div>
