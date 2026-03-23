@@ -7,7 +7,7 @@ export default function Header() {
         <div className="container-fluid clearfix d-lg-flex d-block">
           {/* Website Logo */}
           <div className="logo-header logo-dark me-md-5">
-            <a href="/"><img src="/client/images/logo.svg" alt="logo" /></a>
+            <a href="/"><img src="https://digiai.vndigitech.com/Logo-Digitech.png" alt="logo" style={{ width: '150px', height: 'auto' }} /></a>
           </div>
           {/* Nav Toggle Button */}
           <button className="navbar-toggler collapsed navicon justify-content-end" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,7 +18,7 @@ export default function Header() {
           {/* Main Nav */}
           <div className="header-nav w3menu navbar-collapse collapse justify-content-start" id="navbarNavDropdown">
             <div className="logo-header logo-dark">
-              <a href="/"><img src="/client/images/logo.svg" alt="logo" /></a>
+              <a href="/"><img src="https://digiai.vndigitech.com/Logo-Digitech.png" alt="logo" /></a>
             </div>
             <ul className=" nav navbar-nav">
               <li className="has-mega-menu sub-menu-down auto-width menu-left">

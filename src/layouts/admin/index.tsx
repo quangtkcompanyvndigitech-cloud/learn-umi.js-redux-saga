@@ -1,5 +1,5 @@
 import { Link, Outlet } from "umi";
-
+import "./style.css";
 export default function () {
   return (
     <div className="admin-layout">
@@ -19,12 +19,18 @@ export default function () {
                 Dashboard
               </Link>
             </li>
-            
+
           </ul>
         </nav>
       </aside>
 
       <div className="admin-main">
+        <header className="admin-header">
+          <h1>Dashboard</h1>
+          <div>
+            <button className="btn btn-primary"></button>
+          </div>
+        </header>
         <Outlet />
       </div>
     </div>

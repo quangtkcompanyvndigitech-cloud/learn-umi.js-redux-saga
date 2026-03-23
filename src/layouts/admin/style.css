@@ -1,0 +1,98 @@
+* {
+  box-sizing: border-box;
+}
+
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  background: #f3f5f8;
+}
+
+.admin-sider {
+  width: 242px;
+  background: #d8edf1;
+  border-right: 1px solid #d0dde1;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-admin-container {
+  height: 102px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border-bottom: 1px solid #dee6ea;
+}
+
+.logo-admin {
+  width: 126px;
+  height: auto;
+  object-fit: contain;
+}
+
+.admin-nav {
+  padding: 10px 8px 14px;
+}
+
+.admin-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.admin-nav .nav-item {
+  margin-bottom: 6px;
+}
+
+.admin-nav .nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 38px;
+  padding: 9px 12px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1e2a32;
+  letter-spacing: 0.2px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+
+.admin-nav .nav-link::after {
+  content: "";
+  margin-left: auto;
+  width: 7px;
+  height: 7px;
+  border-right: 1.8px solid currentColor;
+  border-bottom: 1.8px solid currentColor;
+  transform: rotate(45deg) translateY(-1px);
+  opacity: 0.7;
+}
+
+.admin-nav .nav-link:hover {
+  background: #cce6eb;
+}
+
+.admin-nav .nav-link.active {
+  background: #0ea5ad;
+  color: #ffffff;
+}
+
+.admin-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: #ffffff;
+  border-bottom: 1px solid #dee6ea;
+}
