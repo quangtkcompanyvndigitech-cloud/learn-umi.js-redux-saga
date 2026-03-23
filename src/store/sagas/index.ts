@@ -20,7 +20,13 @@ function* loginWorker({ payload }: any): any {
 
 function* registerWorker({ payload }: any): any{
   try {
-    const res = yield call(mockRegister, payload.email, payload.password, payload.name);
+    const res = yield call(
+      mockRegister,
+      payload.email,
+      payload.password,
+      payload.name,
+      payload.phone
+    );
     yield put(registerSuccess(res.message));
   } catch (e: any) {
     yield put(registerFailure(e?.message ?? "Lỗi"));

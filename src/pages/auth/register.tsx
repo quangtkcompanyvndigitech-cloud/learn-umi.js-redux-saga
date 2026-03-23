@@ -54,25 +54,6 @@ export default function RegisterPage() {
     <div className="auth-page page-content bg-light">
       <section className="px-3">
         <div className="row align-center-center">
-          <div className="col-xxl-6 col-xl-6 col-lg-6 start-side-content">
-            <div className="dz-bnr-inr-entry">
-              <h1 className="auth-page-heading">Registration</h1>
-              <nav
-                aria-label="breadcrumb text-align-start"
-                className="breadcrumb-row"
-              >
-                <ul className="breadcrumb">
-                  <li className="breadcrumb-item">
-                    <a href="/"> Home</a>
-                  </li>
-                  <li className="breadcrumb-item">Shop Registration</li>
-                </ul>
-              </nav>
-            </div>
-            <div className="registration-media">
-              <img src="/client/images/registration/pic3.png" alt="/" />
-            </div>
-          </div>
           <div className="col-xxl-6 col-xl-6 col-lg-6 end-side-content">
             <div className="login-area">
               <h2 className="auth-section-title text-secondary text-center">

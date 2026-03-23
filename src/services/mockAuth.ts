@@ -1,7 +1,7 @@
 export async function mockLogin(email: string, password: string) {
   await new Promise((r) => setTimeout(r, 400));
   if (!email || password.length < 3) {
-    throw new Error("Email hoặc mật khẩu không hợp lệ");
+    throw new Error("Invalid email or password");
   }
   return {
     token: `token-${Date.now()}`,
@@ -12,11 +12,13 @@ export async function mockLogin(email: string, password: string) {
 export async function mockRegister(
   email: string,
   password: string,
-  name: string
+  name: string,
+  phone?: string
 ) {
   await new Promise((r) => setTimeout(r, 400));
   if (!email || password.length < 3 || !name.trim()) {
     throw new Error("Thiếu thông tin");
   }
-  return { message: `Đã tạo tài khoản ${email}` };
+  const extra = phone ? ` (${phone})` : "";
+  return { message: `Đã tạo tài khoản ${email}${extra}` };
 }

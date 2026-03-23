@@ -28,23 +28,26 @@
   line-height: 1.4;
 }
 
+.auth-page .login-area {
+  padding: 30px;
+
+}
+
 .auth-page .form-row {
   font-size: 14px;
+}
+
+.auth-page .row {
+  justify-content: center;
 }
 
 .auth-page input::placeholder {
   font-size: 14px;
 }
 
-@media (max-width: 992px) {
-  .registration-media {
-    display: none;
-  }
-
-  .start-side-content {
-    height: auto !important;
-    padding: 70px 15px 0px 15px !important;
-  }
+.end-side-content {
+  height: auto !important;
+  padding: 80px 15px !important;
 }
 
 

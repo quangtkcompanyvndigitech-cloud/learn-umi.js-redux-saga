@@ -85,7 +85,7 @@ export default function () {
         <Header />
 
         <Outlet />
-        <Footer />
+        {/* <Footer /> */}
 
         <button className="scroltop" type="button"><i className="fas fa-arrow-up" /></button>
       </div>
