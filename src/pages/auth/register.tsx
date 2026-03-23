@@ -56,12 +56,16 @@ export default function RegisterPage() {
         <div className="row align-center-center">
           <div className="col-xxl-6 col-xl-6 col-lg-6 end-side-content">
             <div className="login-area">
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <img src="https://digiai.vndigitech.com/Logo-Digitech.png" alt="logo" className="logo-login mb-3 text-center" style={{ width: '250px', height: 'auto' }} />
+              </div>
               <h2 className="auth-section-title text-secondary text-center">
                 Registration Now
               </h2>
               <p className="auth-body-text text-center m-b30">
                 Welcome please registration to your account
               </p>
+              
               <form onSubmit={handleSubmit(onSubmit)} noValidate>
                 {submitError && (
                   <p className="auth-form-message text-danger" role="alert">
@@ -195,20 +199,16 @@ export default function RegisterPage() {
                     </p>
                   )}
                 </div>
+                <Link to="/auth/login" className="text-secondary fs-14" style={{ textDecoration: '', display: 'block', textAlign: 'center', marginBottom: '20px' }}>Bạn đã có tài khoản ? Đăng nhập ngay</Link>
                 <div className="text-center">
                   <button
                     type="submit"
-                    className="btn btn-secondary btnhover text-uppercase me-2"
+                    className="btn btn-secondary btnhover text-uppercase me-2 w-100"
                     disabled={loading}
+                    style={{ width: '100%' }}
                   >
                     {loading ? "…" : "Register"}
                   </button>
-                  <Link
-                    to="/auth/login"
-                    className="btn btn-outline-secondary btnhover text-uppercase"
-                  >
-                    Sign In
-                  </Link>
                 </div>
               </form>
             </div>

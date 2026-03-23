@@ -30,13 +30,27 @@
 
 .auth-page .login-area {
   padding: 30px;
+  background-color: #ffffff;
+  border-radius: 0px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  border: 0px;
+  margin: 0 auto;
+}
 
+.auth-page{
+  height: 100vh;
+}
+
+.auth-page .row {
+  height: 100vh !important;
 }
 
 .auth-page .form-row {
   font-size: 14px;
 }
-
+.auth-page .navbar-toggler {
+  display: block;
+}
 .auth-page .row {
   justify-content: center;
 }
@@ -47,10 +61,17 @@
 
 .end-side-content {
   height: auto !important;
-  padding: 80px 15px !important;
+  padding: 80px 30px !important;
+  display: flex;
+  align-items: start;
+  justify-content: center;
 }
 
-
+@media (max-width: 575px) {
+  .end-side-content {
+    justify-content: start !important;
+  }
+}
 @media only screen and (max-width: 767px) {
   .start-side-content {
     height: auto !important;

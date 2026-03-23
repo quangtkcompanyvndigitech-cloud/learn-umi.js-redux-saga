@@ -7,26 +7,16 @@ export default function Header() {
         <div className="container-fluid clearfix d-lg-flex d-block">
           {/* Website Logo */}
           <div className="logo-header logo-dark me-md-5">
-            <a href="/"><img src="https://digiai.vndigitech.com/Logo-Digitech.png" alt="logo" style={{ width: '150px', height: 'auto' }} /></a>
+            {/* <a href="/"><img src="https://digiai.vndigitech.com/Logo-Digitech.png" alt="logo" style={{ width: '150px', height: 'auto' }} /></a> */}
           </div>
           {/* Nav Toggle Button */}
-          <button className="navbar-toggler collapsed navicon justify-content-end" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span />
-            <span />
-            <span />
-          </button>
+          
           {/* Main Nav */}
           <div className="header-nav w3menu navbar-collapse collapse justify-content-start" id="navbarNavDropdown">
             <div className="logo-header logo-dark">
-              <a href="/"><img src="https://digiai.vndigitech.com/Logo-Digitech.png" alt="logo" /></a>
+              {/* <a href="/"><img src="https://digiai.vndigitech.com/Logo-Digitech.png" alt="logo" /></a> */}
             </div>
             <ul className=" nav navbar-nav">
-              <li className="has-mega-menu sub-menu-down auto-width menu-left">
-                <a href="/">
-                  Home
-                  <i className="fas fa-chevron-down tabindex" />
-                </a>
-              </li>
 
             </ul>
             <div className="dz-social-icon">
@@ -39,18 +29,28 @@ export default function Header() {
             </div>
           </div>
           {/* EXTRA NAV */}
-          <div className="extra-nav">
+          <div
+            className="extra-nav"
+            style={{
+              position: "static",
+              width: "auto",
+              height: "auto",
+              background: "transparent",
+              boxShadow: "none",
+              padding: 0,
+            }}
+          >
             <div className="extra-cell">
               <ul className="header-right">
-                <li className="nav-item login-link">
-                  <a className="nav-link" href="login.html">
-                    Login / Register
-                  </a>
-                </li>
                 <li className="nav-item language-link">
-                  <button className="nav-link border-0 bg-transparent p-0" type="button" aria-label="Change language">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/1280px-Flag_of_Vietnam.svg.png" alt="Tiếng Việt" width={20} height={20} className="me-2" />
-                    Tiếng Việt
+                  <button
+                    className="nav-link border-0 bg-transparent p-0 d-flex align-items-center justify-content-center"
+                    type="button"
+                    aria-label="Change language"
+                    title="Change language"
+                    style={{ minWidth: 40, minHeight: 40, marginTop: 18 }}
+                  >
+                    <i className="fa-solid fa-globe" style={{ fontSize: 22, color: "var(--title)" }} />
                   </button>
                 </li>
                 

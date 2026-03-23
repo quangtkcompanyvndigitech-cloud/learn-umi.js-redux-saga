@@ -54,12 +54,10 @@ export default function LoginPage() {
           </div> */}
           <div className="col-xxl-6 col-xl-6 col-lg-6 end-side-content">
             <div className="login-area">
-              <h2 className="auth-section-title text-secondary text-center">
-                Login
-              </h2>
-              <p className="auth-body-text text-center m-b30">
-                welcome please login to your account
-              </p>
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <img src="https://digiai.vndigitech.com/Logo-Digitech.png" alt="logo" className="logo-login mb-3 text-center" style={{ width: '250px', height: 'auto' }} />
+
+              </div>
               <form onSubmit={handleSubmit(onSubmit)} noValidate>
                 {error && (
                   <p className="auth-form-message text-danger" role="alert">
@@ -113,7 +111,7 @@ export default function LoginPage() {
                   )}
                 </div>
                 <div className="form-row d-flex justify-content-between m-b30">
-                  <div className="form-group">
+                  {/* <div className="form-group">
                     <div className="custom-control custom-checkbox">
                       <input
                         type="checkbox"
@@ -127,27 +125,29 @@ export default function LoginPage() {
                         Remember Me
                       </label>
                     </div>
+                  </div> */}
+                  <div className="form-group">
+                    <a className="text-secondary fs-14" href="forget-password.html">
+                      Forgot Password
+                    </a>
                   </div>
                   <div className="form-group">
-                    <a className="text-primary fs-14" href="forget-password.html">
-                      Forgot Password
+                    <a className="text-secondary fs-14" href="/auth/register">
+                      Register
                     </a>
                   </div>
                 </div>
                 <div className="text-center">
                   <button
                     type="submit"
-                    className="btn btn-secondary btnhover text-uppercase me-2 sign-btn"
+                    className="btn btn-secondary btnhover text-uppercase me-2 sign-btn w-100"
                     disabled={loading}
                   >
-                    {loading ? "…" : "Sign In"}
+                    {loading ? "…" : "Login"}
                   </button>
-                  <Link
-                    to="/auth/register"
-                    className="btn btn-outline-secondary btnhover text-uppercase"
-                  >
-                    Register
-                  </Link>
+                </div>
+                <div className="text-center" style={{ marginTop: '20px' }}>
+                <span className="text-muted">Powered by Digitech Solutions</span>
                 </div>
               </form>
             </div>
