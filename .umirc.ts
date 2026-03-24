@@ -17,7 +17,7 @@ export default defineConfig({
       component: "@/layouts/admin/index.tsx",
       routes: [
         { path: "dashboard", component: "admin/dashboard/index.tsx" },
-
+        { path: "profile", component: "admin/profile/index.tsx" },
       ],
     },
     { path: "*", component: "@/pages/404.tsx" },
