@@ -17,7 +17,6 @@ export default function Sider() {
   const { toggleSidebar, state } = useSidebar();
   const location = useLocation();
   const isCollapsed = state === "collapsed";
-  const isActive = location.pathname === "/admin/dashboard";
 
   return (
     <Sidebar
@@ -37,8 +36,8 @@ export default function Sider() {
             </span>
           </div>
         ) : (
-          <div className="mx-auto w-10 rounded-xl bg-[#111] text-white flex items-center justify-center h-[27px]">
-            <i className="fa-solid fa-briefcase" />
+          <div className="mx-auto w-10 rounded-xl flex items-center justify-center h-[27px]">
+            <img src="https://digiai-staging.vndigitech.com/collapse.png" alt="" />
           </div>
         )}
       </SidebarHeader>
@@ -52,7 +51,7 @@ export default function Sider() {
                 className={`flex h-11 items-center rounded-xl px-3 no-underline transition ${
                   isCollapsed ? "justify-center" : "gap-2"
                 } ${
-                  isActive
+                  location.pathname === "/admin/dashboard"
                     ? "bg-[#0ea5ad] text-white"
                     : "text-[#1f2937] hover:bg-[#d6ecee]"
                 }`}
@@ -74,9 +73,38 @@ export default function Sider() {
               Dashboard
             </TooltipContent>
           </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link
+                to="/admin/profile"
+                className={`flex h-11 items-center rounded-xl px-3 no-underline transition ${
+                  isCollapsed ? "justify-center" : "gap-2"
+                } ${
+                  location.pathname === "/admin/profile"
+                    ? "bg-[#0ea5ad] text-white"
+                    : "text-[#1f2937] hover:bg-[#d6ecee]"
+                }`}
+              >
+                <i className="fa-solid fa-user text-[14px]" />
+                {!isCollapsed ? (
+                  <span className="text-[13px] font-semibold uppercase">
+                    Profile
+                  </span>
+                ) : null}
+              </Link>
+            </TooltipTrigger>
+            <TooltipContent
+              side="right"
+              align="center"
+              hidden={!isCollapsed}
+              className="border-none bg-[#111827] text-white"
+            >
+              Profile
+            </TooltipContent>
+          </Tooltip>
         </nav>
       </SidebarContent>
-      <SidebarFooter className="px-2 pb-2">
+      <SidebarFooter className="px-2 pb-2 gap-0">
         <div className="my-2 h-px w-full bg-gray-300"></div>
         <div className="flex flex-col gap-y-2 md:hidden">
           <AdminHeaderUserProfile />
@@ -84,11 +112,11 @@ export default function Sider() {
         <button
           type="button"
           onClick={toggleSidebar}
-          className={`flex w-full cursor-pointer rounded-xl border-none bg-transparent py-3 text-[#1f2937] hover:bg-[#d6ecee] ${
+          className={`flex w-full cursor-pointer rounded-xl border-none bg-transparent py-1 text-[#1f2937] hover:bg-[#d6ecee] ${
             isCollapsed ? "justify-center" : "px-3"
           }`}
         >
-          <i className="fa-solid fa-outdent text-[16px]" />
+          <i className="fa-solid fa-outdent text-[16px] ml-auto" />
         </button>
       </SidebarFooter>
     </Sidebar>
