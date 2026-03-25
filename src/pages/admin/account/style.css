@@ -1,0 +1,29 @@
+[account-page] [filter-account] button {
+  border: 1px solid #e5e7eb;
+  padding: 5px 10px;
+  height: auto;
+  border-radius: 0px;
+}
+
+[account-page] [filter-account] select,input {
+  border: 1px solid #e5e7eb;
+  outline: none;
+  height: auto;
+  padding: 5px 10px;
+}
+
+[account-page] [filter-account] .button-search {
+  border: none;
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+[account-page] [filter-account] .button-add-account {
+  border-radius: 10px;
+}
+
+[account-page] [filter-account] .input-search input {
+  width: -webkit-fill-available;
+}

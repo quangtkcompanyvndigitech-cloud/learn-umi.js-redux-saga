@@ -11,12 +11,12 @@ export default function Header() {
   const { toggleSidebar } = useSidebar();
 
   return (
-    <header className="flex justify-between items-center px-6 py-0 ">
+    <header className="flex justify-between items-center pr-6 py-0 ">
       <div className="flex items-center gap-2">
         <button
           type="button"
           onClick={toggleSidebar}
-          className="cursor-pointer bg-inherit border-none h-full p-5 rounded-xl hover:bg-gray-200 duration-500"
+          className="cursor-pointer bg-inherit border-none h-full p-3 rounded-xl hover:bg-gray-200 duration-500"
         >
           <i className="fa-solid fa-outdent cursor-pointer text-[18px]"></i>
         </button>

@@ -102,6 +102,35 @@ export default function Sider() {
               Profile
             </TooltipContent>
           </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link
+                to="/admin/account-user"
+                className={`flex h-11 items-center rounded-xl px-3 no-underline transition ${
+                  isCollapsed ? "justify-center" : "gap-2"
+                } ${
+                  location.pathname === "/admin/account-user"
+                    ? "bg-[#0ea5ad] text-white"
+                    : "text-[#1f2937] hover:bg-[#d6ecee]"
+                }`}
+              >
+                <i className="fa-solid fa-users text-[14px]" />
+                {!isCollapsed ? (
+                  <span className="text-[13px] font-semibold uppercase">
+                    Account User
+                  </span>
+                ) : null}
+              </Link>
+            </TooltipTrigger>
+            <TooltipContent
+              side="right"
+              align="center"
+              hidden={!isCollapsed}
+              className="border-none bg-[#111827] text-white"
+            >
+              Account User
+            </TooltipContent>
+          </Tooltip>
         </nav>
       </SidebarContent>
       <SidebarFooter className="px-2 pb-2 gap-0">
