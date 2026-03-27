@@ -20,6 +20,9 @@ import {
 import { MOCK_ACCOUNTS } from "./mockAccounts";
 
 export default function () {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState("10");
+
   const typeBadgeClass = (type: string) => {
     if (type === "Khách hàng") return "bg-[#1d9f3a] text-white";
     if (type === "Nhân viên") return "bg-[#3b82f6] text-white";
@@ -210,7 +213,7 @@ export default function () {
                     <i className="fa-regular fa-user text-xl" />
                   </div>
                 </TableCell>
-                <TableCell className="px-4 py-4 z-10 bg-white">
+                <TableCell className="px-4 py-4 z-10">
                   <div className="flex flex-col gap-3">
                     <span>{u.name}</span>
                     <span className={`rounded-sm px-2 py-1 text-xs text-nowrap w-max ${typeBadgeClass(u.type)}`}>
@@ -236,6 +239,70 @@ export default function () {
             ))}
           </TableBody>
         </Table>
+
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200 pt-3" data-pagination="pagination">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="hidden lg:block rounded-sm border border-slate-200 px-4 py-2 text-base font-medium text-slate-700">
+              Tổng cộng
+            </span>
+
+            <button
+              type="button"
+              className="flex cursor-pointer hover:bg-slate-100 h-9 w-9 items-center justify-center rounded-sm border border-slate-200 text-slate-400"
+            >
+              <i className="fa-solid fa-chevron-left text-xs" />
+            </button>
+
+            {[1, 2, 3].map((page) => (
+              <button
+                key={page}
+                type="button"
+                onClick={() => setCurrentPage(page)}
+                className={`flex cursor-pointer hover:bg-slate-100 h-9 min-w-9 items-center justify-center rounded-sm border px-3 text-base ${
+                  currentPage === page
+                    ? "border-[#0ea5ad] text-[#0ea5ad]"
+                    : "border-slate-200 text-slate-700"
+                }`}
+              >
+                {page}
+              </button>
+            ))}
+
+            <span className="px-2 text-lg text-slate-400">...</span>
+
+            <button
+              type="button"
+              onClick={() => setCurrentPage(14)}
+              className={`flex cursor-pointer hover:bg-slate-100 h-9 min-w-9 items-center justify-center rounded-sm border px-3 text-base ${
+                currentPage === 14
+                  ? "border-[#0ea5ad] text-[#0ea5ad]"
+                  : "border-slate-200 text-slate-700"
+              }`}
+            >
+              14
+            </button>
+
+            <button
+              type="button"
+              className="flex cursor-pointer hover:bg-slate-100 h-9 w-9 items-center justify-center rounded-sm border border-slate-200 text-slate-700"
+            >
+              <i className="fa-solid fa-chevron-right text-xs" />
+            </button>
+          </div>
+
+          <div className="w-full sm:w-auto">
+            <select
+              value={pageSize}
+              onChange={(e) => setPageSize(e.target.value)}
+              className="h-9 w-full rounded-sm border border-[#0ea5ad] bg-[#e8f5f6] px-3 text-xl text-slate-700 sm:min-w-[210px] focus:outline-none"
+            >
+              <option value="10">10 / trang</option>
+              <option value="20">20 / trang</option>
+              <option value="50">50 / trang</option>
+              <option value="100">100 / trang</option>
+            </select>
+          </div>
+        </div>
       </div>
     </div>
   );

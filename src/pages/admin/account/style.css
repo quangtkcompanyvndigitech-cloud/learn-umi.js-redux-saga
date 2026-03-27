@@ -27,3 +27,9 @@
 [account-page] [filter-account] .input-search input {
   width: -webkit-fill-available;
 }
+
+
+[data-pagination] button {
+  border: 1px solid #e5e7eb;
+  border-radius: 2px;
+}
